@@ -1,6 +1,7 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.tabs.settings
+package org.rasulov.application.screens.main.tabs.settings
 
 import androidx.recyclerview.widget.DiffUtil
+import org.rasulov.application.screens.main.tabs.settings.BoxSetting
 
 class BoxSettingsDiffCallback(
     private val oldList: List<BoxSetting>,

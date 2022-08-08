@@ -1,21 +1,25 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.auth
+package org.rasulov.application.screens.main.auth
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
-import ua.cn.stu.navcomponent.tabs.R
-import ua.cn.stu.navcomponent.tabs.Repositories
-import ua.cn.stu.navcomponent.tabs.databinding.FragmentSignUpBinding
-import ua.cn.stu.navcomponent.tabs.model.accounts.entities.SignUpData
-import ua.cn.stu.navcomponent.tabs.utils.observeEvent
+import org.rasulov.application.R
+import org.rasulov.application.databinding.FragmentSignUpBinding
+import org.rasulov.application.model.Repositories
+import org.rasulov.application.model.accounts.entities.SignUpData
 import org.rasulov.application.utils.viewModelCreator
+import org.rasulov.application.utils.observeEvent
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private lateinit var binding: FragmentSignUpBinding
+
+    private val args by navArgs<SignUpFragmentArgs>()
 
     private val viewModel by viewModelCreator { SignUpViewModel(Repositories.accountsRepository) }
 
@@ -58,9 +62,10 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         binding.progressBar.visibility = if (state.showProgress) View.VISIBLE else View.INVISIBLE
     }
 
-    private fun observeShowSuccessSignUpMessageEvent() = viewModel.showSuccessSignUpMessageEvent.observeEvent(viewLifecycleOwner) {
-        Toast.makeText(requireContext(), R.string.sign_up_success, Toast.LENGTH_LONG).show()
-    }
+    private fun observeShowSuccessSignUpMessageEvent() =
+        viewModel.showSuccessSignUpMessageEvent.observeEvent(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), R.string.sign_up_success, Toast.LENGTH_LONG).show()
+        }
 
     private fun fillError(input: TextInputLayout, @StringRes stringRes: Int) {
         if (stringRes == SignUpViewModel.NO_ERROR_MESSAGE) {
@@ -73,10 +78,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     }
 
     private fun observeGoBackEvent() = viewModel.goBackEvent.observeEvent(viewLifecycleOwner) {
-        TODO("Go back to the previous screen here")
+        findNavController().popBackStack()
     }
 
-    private fun getEmailArgument(): String? {
-        TODO("Extract email value from arguments here")
-    }
+    private fun getEmailArgument() = args.mail
 }

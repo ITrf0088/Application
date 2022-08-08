@@ -1,13 +1,19 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.tabs.profile
+package org.rasulov.application.screens.main.tabs.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import ua.cn.stu.navcomponent.tabs.*
-import ua.cn.stu.navcomponent.tabs.databinding.FragmentProfileBinding
-import ua.cn.stu.navcomponent.tabs.model.accounts.entities.Account
-import ua.cn.stu.navcomponent.tabs.utils.observeEvent
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
+import org.rasulov.application.R
+import org.rasulov.application.databinding.FragmentProfileBinding
+import org.rasulov.application.model.Repositories
+import org.rasulov.application.model.accounts.entities.Account
+import org.rasulov.application.utils.findTopNavController
 import org.rasulov.application.utils.viewModelCreator
+import org.rasulov.application.utils.observeEvent
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -17,15 +23,30 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val viewModel by viewModelCreator { ProfileViewModel(Repositories.accountsRepository) }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("itlife0088", "onCreate: $this")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileBinding.bind(view)
 
         binding.editProfileButton.setOnClickListener { onEditProfileButtonPressed() }
         binding.logoutButton.setOnClickListener { onLogoutButtonPressed() }
-
+        Log.d("itlife0088", "onCreatedView: $this")
         observeAccountDetails()
         observeRestartAppFromLoginScreenEvent()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("itlife0088", "onDestroyView: $this")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("itlife0088", "onDestroy: $this")
     }
 
     private fun observeAccountDetails() {
@@ -42,13 +63,21 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun onEditProfileButtonPressed() {
-        TODO("Launch EditProfileFragment gere over tabs (tabs should not be available from EditProfileFragment")
+        findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
     }
+
 
     private fun observeRestartAppFromLoginScreenEvent() {
         viewModel.restartWithSignInEvent.observeEvent(viewLifecycleOwner) {
-            // user has signed out from the app
-            TODO("Close all tab screens and launch SignInFragment here")
+            findTopNavController().navigate(
+                R.id.signInFragment,
+                null,
+                navOptions {
+                    popUpTo(R.id.tabsFragment) {
+                        inclusive = true
+                    }
+                }
+            )
         }
     }
 

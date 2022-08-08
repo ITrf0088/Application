@@ -1,4 +1,4 @@
-package ua.cn.stu.navcomponent.tabs.utils
+package org.rasulov.application.utils
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

@@ -1,28 +1,28 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.auth
+package org.rasulov.application.screens.main.auth
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ua.cn.stu.navcomponent.tabs.R
-import ua.cn.stu.navcomponent.tabs.model.AccountAlreadyExistsException
-import ua.cn.stu.navcomponent.tabs.model.EmptyFieldException
-import ua.cn.stu.navcomponent.tabs.model.Field
-import ua.cn.stu.navcomponent.tabs.model.PasswordMismatchException
-import ua.cn.stu.navcomponent.tabs.model.accounts.AccountsRepository
-import ua.cn.stu.navcomponent.tabs.model.accounts.entities.SignUpData
-import ua.cn.stu.navcomponent.tabs.utils.MutableUnitLiveEvent
-import ua.cn.stu.navcomponent.tabs.utils.publishEvent
-import ua.cn.stu.navcomponent.tabs.utils.requireValue
-import ua.cn.stu.navcomponent.tabs.utils.share
+import org.rasulov.application.R
+import org.rasulov.application.model.AccountAlreadyExistsException
+import org.rasulov.application.model.EmptyFieldException
+import org.rasulov.application.model.Field
+import org.rasulov.application.model.PasswordMismatchException
+import org.rasulov.application.model.accounts.AccountsRepository
+import org.rasulov.application.model.accounts.entities.SignUpData
+import org.rasulov.application.utils.MutableUnitLiveEvent
+import org.rasulov.application.utils.publishEvent
+import org.rasulov.application.utils.requireValue
+import org.rasulov.application.utils.share
 
 class SignUpViewModel(
     private val accountsRepository: AccountsRepository
 ) : ViewModel() {
 
     private val _showSuccessSignUpMessageEvent = MutableUnitLiveEvent()
-    val showSuccessSignUpMessageEvent =_showSuccessSignUpMessageEvent.share()
+    val showSuccessSignUpMessageEvent = _showSuccessSignUpMessageEvent.share()
 
     private val _goBackEvent = MutableUnitLiveEvent()
     val goBackEvent = _goBackEvent.share()

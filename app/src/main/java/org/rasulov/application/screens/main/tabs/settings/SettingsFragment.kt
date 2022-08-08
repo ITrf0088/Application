@@ -1,12 +1,13 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.tabs.settings
+package org.rasulov.application.screens.main.tabs.settings
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import ua.cn.stu.navcomponent.tabs.R
-import ua.cn.stu.navcomponent.tabs.Repositories
-import ua.cn.stu.navcomponent.tabs.databinding.FragmentSettingsBinding
+import org.rasulov.application.R
+import org.rasulov.application.databinding.FragmentSettingsBinding
+import org.rasulov.application.model.Repositories
 import org.rasulov.application.utils.viewModelCreator
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
@@ -15,12 +16,27 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private val viewModel by viewModelCreator { SettingsViewModel(Repositories.boxesRepository) }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("itlife0088", "onCreate: $this")
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSettingsBinding.bind(view)
 
         val adapter = setupList()
         viewModel.boxSettings.observe(viewLifecycleOwner) { adapter.renderSettings(it) }
+        Log.d("itlife0088", "onCreatedView: $this")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("itlife0088", "onDestroyView: $this")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("itlife0088", "onDestroy: $this")
     }
 
     private fun setupList(): SettingsAdapter {

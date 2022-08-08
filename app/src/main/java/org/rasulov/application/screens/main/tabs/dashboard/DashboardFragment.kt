@@ -1,16 +1,17 @@
 package org.rasulov.application.screens.main.tabs.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import ua.cn.stu.navcomponent.tabs.R
-import ua.cn.stu.navcomponent.tabs.Repositories
-import ua.cn.stu.navcomponent.tabs.databinding.FragmentDashboardBinding
-import ua.cn.stu.navcomponent.tabs.model.boxes.entities.Box
+import androidx.navigation.fragment.findNavController
+import org.rasulov.application.R
+import org.rasulov.application.databinding.FragmentDashboardBinding
+import org.rasulov.application.model.Repositories
+import org.rasulov.application.model.boxes.entities.Box
 import org.rasulov.application.utils.viewModelCreator
 import org.rasulov.application.views.DashboardItemView
-import ua.cn.stu.navcomponent.tabs.screens.main.tabs.dashboard.DashboardViewModel
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
@@ -18,13 +19,31 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
     private lateinit var binding: FragmentDashboardBinding
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("itlife0088", "onCreate: $this")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDashboardBinding.bind(view)
 
         clearBoxViews()
 
+        Log.d("itr0088", "onCreateview: ${parentFragment?.parentFragmentManager} $this")
+        Log.d("itr0088", "onCreateview: $childFragmentManager $this")
+        Log.d("itlife0088", "onCreatedView: $this")
         viewModel.boxes.observe(viewLifecycleOwner) { renderBoxes(it) }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("itlife0088", "onDestroyView: $this")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("itlife0088", "onDestroy: $this")
     }
 
     private fun renderBoxes(boxes: List<Box>) {
@@ -61,12 +80,17 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
     private fun clearBoxViews() {
         binding.boxesContainer.removeViews(1, binding.root.childCount - 1)
+
     }
 
     private val boxClickListener = View.OnClickListener {
         val box = it.tag as Box
-        TODO("Launch BoxFragment and send box.id, box.colorValue and color name as it's arguments. " +
-                "BoxFragment should be placed inside the current tab (tabs should be available from BoxFragment)")
+        val direction = DashboardFragmentDirections.actionDashboardFragmentToBoxFragment(
+            box.id,
+            getString(box.colorNameRes),
+            box.colorValue
+        )
+        findNavController().navigate(direction)
     }
 
 }

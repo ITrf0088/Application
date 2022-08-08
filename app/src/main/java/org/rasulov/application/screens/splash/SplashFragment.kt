@@ -1,13 +1,16 @@
-package ua.cn.stu.navcomponent.tabs.screens.splash
+package org.rasulov.application.screens.splash
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import ua.cn.stu.navcomponent.tabs.R
-import ua.cn.stu.navcomponent.tabs.Repositories
-import ua.cn.stu.navcomponent.tabs.databinding.FragmentSplashBinding
-import ua.cn.stu.navcomponent.tabs.utils.observeEvent
+import org.rasulov.application.R
+import org.rasulov.application.databinding.FragmentSplashBinding
+import org.rasulov.application.model.Repositories
+import org.rasulov.application.screens.main.MainActivity
+import org.rasulov.application.screens.main.MainActivityArgs
 import org.rasulov.application.utils.viewModelCreator
+import org.rasulov.application.utils.observeEvent
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
@@ -22,11 +25,16 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         // just some animations example
         renderAnimations()
 
-        viewModel.launchMainScreenEvent.observeEvent(viewLifecycleOwner) { launchMainScreen(it) }
+        viewModel.launchMainScreenEvent.observeEvent(viewLifecycleOwner) {
+            launchMainScreen(it)
+        }
     }
 
     private fun launchMainScreen(isSignedIn: Boolean) {
-        TODO("Launch MainActivity here and send isSignedIn flag to it")
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        intent.putExtra(MainActivity.IS_SIGNED_IN, isSignedIn)
+        startActivity(intent)
     }
 
     private fun renderAnimations() {

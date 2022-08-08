@@ -1,18 +1,22 @@
-package ua.cn.stu.navcomponent.tabs.screens.main
+package org.rasulov.application.screens.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import ua.cn.stu.navcomponent.tabs.R
-import ua.cn.stu.navcomponent.tabs.Repositories
-import ua.cn.stu.navcomponent.tabs.databinding.ActivityMainBinding
-import ua.cn.stu.navcomponent.tabs.screens.main.tabs.TabsFragment
+import org.rasulov.application.R
+import org.rasulov.application.databinding.ActivityMainBinding
+import org.rasulov.application.model.Repositories
+import org.rasulov.application.screens.main.tabs.TabsFragment
+import org.rasulov.application.utils.requireExtraOrThrow
 import org.rasulov.application.utils.viewModelCreator
 import java.util.regex.Pattern
 
@@ -31,9 +35,15 @@ class MainActivity : AppCompatActivity() {
 
     // fragment listener is sued for tracking current nav controller
     private val fragmentListener = object : FragmentManager.FragmentLifecycleCallbacks() {
-        override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
+        override fun onFragmentViewCreated(
+            fm: FragmentManager,
+            f: Fragment,
+            v: View,
+            savedInstanceState: Bundle?
+        ) {
             super.onFragmentViewCreated(fm, f, v, savedInstanceState)
             if (f is TabsFragment || f is NavHostFragment) return
+            Log.d("it0088", "onFragmentViewCreated: $f")
             onNavControllerActivated(f.findNavController())
         }
     }
@@ -54,23 +64,14 @@ class MainActivity : AppCompatActivity() {
         viewModel.username.observe(this) {
             binding.usernameTextView.text = it
         }
+        Log.d("itr0088", "onCreate: $supportFragmentManager")
     }
 
-    override fun onDestroy() {
-        supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentListener)
-        navController = null
-        super.onDestroy()
+    private fun getRootNavController(): NavController {
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
+        return navHost.navController
     }
-
-    override fun onBackPressed() {
-        if (isStartDestination(navController?.currentDestination)) {
-            super.onBackPressed()
-        } else {
-            navController?.popBackStack()
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean = (navController?.navigateUp() ?: false) || super.onSupportNavigateUp()
 
     private fun prepareRootNavController(isSignedIn: Boolean, navController: NavController) {
         val graph = navController.navInflater.inflate(getMainNavigationGraphId())
@@ -85,21 +86,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onNavControllerActivated(navController: NavController) {
+        Log.d("it0088", "onNavControllerActivated: ${navController.graph}")
         if (this.navController == navController) return
         this.navController?.removeOnDestinationChangedListener(destinationListener)
         navController.addOnDestinationChangedListener(destinationListener)
         this.navController = navController
     }
 
-    private fun getRootNavController(): NavController {
-        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
-        return navHost.navController
+
+    private val destinationListener =
+        NavController.OnDestinationChangedListener { _, destination, arguments ->
+            supportActionBar?.title = prepareTitle(destination.label, arguments)
+            supportActionBar?.setDisplayHomeAsUpEnabled(!isStartDestination(destination))
+        }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
-    private val destinationListener = NavController.OnDestinationChangedListener { _, destination, arguments ->
-        supportActionBar?.title = prepareTitle(destination.label, arguments)
-        supportActionBar?.setDisplayHomeAsUpEnabled(!isStartDestination(destination))
-    }
 
     private fun isStartDestination(destination: NavDestination?): Boolean {
         if (destination == null) return false
@@ -107,6 +112,25 @@ class MainActivity : AppCompatActivity() {
         val startDestinations = topLevelDestinations + graph.startDestinationId
         return startDestinations.contains(destination.id)
     }
+
+    override fun onSupportNavigateUp(): Boolean =
+        (navController?.navigateUp() ?: false) || super.onSupportNavigateUp()
+
+
+    override fun onDestroy() {
+        supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentListener)
+        navController = null
+        super.onDestroy()
+    }
+
+    private fun isSignedIn(): Boolean = requireExtraOrThrow(IS_SIGNED_IN)
+
+    private fun getMainNavigationGraphId() = R.navigation.main_nav_graph
+
+    private fun getTabsDestination() = R.id.tabsFragment
+
+    private fun getSignInDestination() = R.id.signInFragment
+
 
     private fun prepareTitle(label: CharSequence?, arguments: Bundle?): String {
 
@@ -131,20 +155,9 @@ class MainActivity : AppCompatActivity() {
         return title.toString()
     }
 
-    private fun isSignedIn(): Boolean {
-        TODO("Extract isSignedIn flag from extras bundle here")
+    companion object {
+        const val IS_SIGNED_IN = "isSignedIn"
     }
 
-    private fun getMainNavigationGraphId(): Int {
-        TODO("Please create a main navigation graph and return it's ID here")
-    }
-
-    private fun getTabsDestination(): Int {
-        TODO("Please return the ID of TabsFragment destination from main graph here")
-    }
-
-    private fun getSignInDestination(): Int {
-        TODO("Please return the ID of SignInFragment destination from main graph here")
-    }
 
 }

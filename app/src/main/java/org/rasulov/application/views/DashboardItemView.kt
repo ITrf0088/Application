@@ -9,6 +9,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
+import org.rasulov.application.R
+import org.rasulov.application.databinding.PartDashboardItemBinding
+import org.rasulov.application.model.boxes.entities.Box
 
 
 class DashboardItemView(

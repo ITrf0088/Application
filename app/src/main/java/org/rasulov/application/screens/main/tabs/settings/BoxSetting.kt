@@ -1,6 +1,6 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.tabs.settings
+package org.rasulov.application.screens.main.tabs.settings
 
-import ua.cn.stu.navcomponent.tabs.model.boxes.entities.Box
+import org.rasulov.application.model.boxes.entities.Box
 
 data class BoxSetting(
     val box: Box,

@@ -1,15 +1,14 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.tabs.profile
+package org.rasulov.application.screens.main.tabs.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import ua.cn.stu.navcomponent.tabs.model.accounts.AccountsRepository
-import ua.cn.stu.navcomponent.tabs.model.accounts.entities.Account
-import ua.cn.stu.navcomponent.tabs.utils.MutableLiveEvent
-import ua.cn.stu.navcomponent.tabs.utils.publishEvent
-import ua.cn.stu.navcomponent.tabs.utils.share
+import org.rasulov.application.model.accounts.AccountsRepository
+import org.rasulov.application.model.accounts.entities.Account
+import org.rasulov.application.utils.MutableLiveEvent
+import org.rasulov.application.utils.publishEvent
+import org.rasulov.application.utils.share
 
 class ProfileViewModel(
     private val accountsRepository: AccountsRepository

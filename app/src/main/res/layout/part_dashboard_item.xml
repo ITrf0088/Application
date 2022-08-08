@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:parentTag="android.widget.FrameLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:parentTag="android.widget.FrameLayout">
 
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:ellipsize="end"
         android:fontFamily="casual"
         android:gravity="center"
-        android:textSize="18sp"
         android:lines="2"
-        android:ellipsize="end"
         android:padding="8dp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        tools:text="Some Title"/>
+        tools:text="Some Title" />
 
 </merge>

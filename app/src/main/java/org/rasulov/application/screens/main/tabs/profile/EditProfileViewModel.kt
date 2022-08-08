@@ -1,4 +1,4 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.tabs.profile
+package org.rasulov.application.screens.main.tabs.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,12 +6,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import ua.cn.stu.navcomponent.tabs.model.EmptyFieldException
-import ua.cn.stu.navcomponent.tabs.model.accounts.AccountsRepository
-import ua.cn.stu.navcomponent.tabs.utils.MutableLiveEvent
-import ua.cn.stu.navcomponent.tabs.utils.MutableUnitLiveEvent
-import ua.cn.stu.navcomponent.tabs.utils.publishEvent
-import ua.cn.stu.navcomponent.tabs.utils.share
+import org.rasulov.application.model.EmptyFieldException
+import org.rasulov.application.model.accounts.AccountsRepository
+import org.rasulov.application.utils.MutableLiveEvent
+import org.rasulov.application.utils.MutableUnitLiveEvent
+import org.rasulov.application.utils.publishEvent
+import org.rasulov.application.utils.share
 
 class EditProfileViewModel(
     private val accountsRepository: AccountsRepository

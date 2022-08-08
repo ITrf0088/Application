@@ -1,17 +1,17 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.auth
+package org.rasulov.application.screens.main.auth
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ua.cn.stu.navcomponent.tabs.model.AuthException
-import ua.cn.stu.navcomponent.tabs.model.EmptyFieldException
-import ua.cn.stu.navcomponent.tabs.model.Field
-import ua.cn.stu.navcomponent.tabs.model.accounts.AccountsRepository
-import ua.cn.stu.navcomponent.tabs.utils.MutableUnitLiveEvent
-import ua.cn.stu.navcomponent.tabs.utils.publishEvent
-import ua.cn.stu.navcomponent.tabs.utils.requireValue
-import ua.cn.stu.navcomponent.tabs.utils.share
+import org.rasulov.application.model.AuthException
+import org.rasulov.application.model.EmptyFieldException
+import org.rasulov.application.model.Field
+import org.rasulov.application.model.accounts.AccountsRepository
+import org.rasulov.application.utils.MutableUnitLiveEvent
+import org.rasulov.application.utils.publishEvent
+import org.rasulov.application.utils.requireValue
+import org.rasulov.application.utils.share
 
 class SignInViewModel(
     private val accountsRepository: AccountsRepository

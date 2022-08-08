@@ -1,14 +1,13 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.tabs.dashboard
+package org.rasulov.application.screens.main.tabs.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import ua.cn.stu.navcomponent.tabs.model.boxes.BoxesRepository
-import ua.cn.stu.navcomponent.tabs.utils.MutableLiveEvent
-import ua.cn.stu.navcomponent.tabs.utils.publishEvent
-import ua.cn.stu.navcomponent.tabs.utils.share
+import org.rasulov.application.model.boxes.BoxesRepository
+import org.rasulov.application.utils.MutableLiveEvent
+import org.rasulov.application.utils.publishEvent
+import org.rasulov.application.utils.share
 
 class BoxViewModel(
     private val boxId: Int,

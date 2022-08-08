@@ -1,14 +1,13 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.tabs.settings
+package org.rasulov.application.screens.main.tabs.settings
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import ua.cn.stu.navcomponent.tabs.R
-import ua.cn.stu.navcomponent.tabs.model.boxes.entities.Box
+import org.rasulov.application.R
+import org.rasulov.application.model.boxes.entities.Box
 
 class SettingsAdapter(
     private val listener: Listener

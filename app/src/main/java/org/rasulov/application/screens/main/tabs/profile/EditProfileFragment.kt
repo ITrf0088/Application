@@ -1,20 +1,27 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.tabs.profile
+package org.rasulov.application.screens.main.tabs.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import ua.cn.stu.navcomponent.tabs.R
-import ua.cn.stu.navcomponent.tabs.Repositories
-import ua.cn.stu.navcomponent.tabs.databinding.FragmentEditProfileBinding
-import ua.cn.stu.navcomponent.tabs.utils.observeEvent
+import androidx.navigation.fragment.findNavController
+import org.rasulov.application.R
+import org.rasulov.application.databinding.FragmentEditProfileBinding
+import org.rasulov.application.model.Repositories
 import org.rasulov.application.utils.viewModelCreator
+import org.rasulov.application.utils.observeEvent
 
 class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     private lateinit var binding: FragmentEditProfileBinding
 
     private val viewModel by viewModelCreator { EditProfileViewModel(Repositories.accountsRepository) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("itlife0088", "onCreate: $this")
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,6 +33,18 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         observeGoBackEvent()
         observeSaveInProgress()
         observeEmptyFieldErrorEvent()
+        Log.d("itlife0088", "onCreatedView: $this")
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("itlife0088", "onDestroyView: $this")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("itlife0088", "onDestroy: $this")
     }
 
     private fun onSaveButtonPressed() {
@@ -53,10 +72,11 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun onCancelButtonPressed() {
-        TODO("Go back to the previous screen here")
+        findNavController().popBackStack()
     }
 
     private fun observeGoBackEvent() = viewModel.goBackEvent.observeEvent(viewLifecycleOwner) {
-        TODO("Go back to the previous screen here")
+        findNavController().popBackStack()
+
     }
 }

@@ -1,14 +1,13 @@
-package ua.cn.stu.navcomponent.tabs.screens.main.tabs.settings
+package org.rasulov.application.screens.main.tabs.settings
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import ua.cn.stu.navcomponent.tabs.model.boxes.BoxesRepository
-import ua.cn.stu.navcomponent.tabs.model.boxes.entities.Box
-import ua.cn.stu.navcomponent.tabs.utils.share
+import org.rasulov.application.model.boxes.BoxesRepository
+import org.rasulov.application.model.boxes.entities.Box
+import org.rasulov.application.utils.share
 
 class SettingsViewModel(
     private val boxesRepository: BoxesRepository

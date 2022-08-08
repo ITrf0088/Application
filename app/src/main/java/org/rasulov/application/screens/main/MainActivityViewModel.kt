@@ -1,12 +1,11 @@
-package ua.cn.stu.navcomponent.tabs.screens.main
+package org.rasulov.application.screens.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import ua.cn.stu.navcomponent.tabs.model.accounts.AccountsRepository
-import ua.cn.stu.navcomponent.tabs.utils.share
+import org.rasulov.application.model.accounts.AccountsRepository
+import org.rasulov.application.utils.share
 
 class MainActivityViewModel(
     private val accountsRepository: AccountsRepository
