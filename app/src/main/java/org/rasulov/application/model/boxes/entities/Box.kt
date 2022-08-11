@@ -3,7 +3,7 @@ package org.rasulov.application.model.boxes.entities
 import androidx.annotation.StringRes
 
 data class Box(
-    val id: Int,
-    @StringRes val colorNameRes: Int,
+    val id: Long,
+    val colorName: String,
     val colorValue: Int
 )

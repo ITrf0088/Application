@@ -1,5 +1,6 @@
 package org.rasulov.application.screens.main.tabs.dashboard
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,4 +24,8 @@ class DashboardViewModel(
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("itlife0088", "onCleared: dashboasrd")
+    }
 }

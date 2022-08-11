@@ -1,5 +1,6 @@
 package org.rasulov.application.screens.main.tabs.profile
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -63,5 +64,8 @@ class EditProfileViewModel(
 
     private fun showEmptyFieldErrorMessage() = _showEmptyFieldErrorEvent.publishEvent()
 
-
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("itlife0088", "onCleared: clear")
+    }
 }

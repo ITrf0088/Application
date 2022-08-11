@@ -10,7 +10,7 @@ import org.rasulov.application.utils.publishEvent
 import org.rasulov.application.utils.share
 
 class BoxViewModel(
-    private val boxId: Int,
+    private val boxId: Long,
     private val boxesRepository: BoxesRepository
 ) : ViewModel() {
 

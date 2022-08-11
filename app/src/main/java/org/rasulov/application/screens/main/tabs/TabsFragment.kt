@@ -22,7 +22,7 @@ class TabsFragment : Fragment(R.layout.fragment_tabs) {
         binding = FragmentTabsBinding.bind(view)
 
         val navController = findCurrentNavController()
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController,false)
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
 
         val childFragmentManager =
             childFragmentManager.findFragmentById(R.id.tabsContainer)?.childFragmentManager

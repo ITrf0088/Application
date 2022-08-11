@@ -21,7 +21,8 @@ class SettingsViewModel(
             val allBoxesFlow = boxesRepository.getBoxes(onlyActive = false)
             val activeBoxesFlow = boxesRepository.getBoxes(onlyActive = true)
             val boxSettingsFlow = combine(allBoxesFlow, activeBoxesFlow) { allBoxes, activeBoxes ->
-                allBoxes.map { BoxSetting(it, activeBoxes.contains(it)) } // O^n2 performance, should be optimized for large lists
+                allBoxes.map {
+                    BoxSetting(it, activeBoxes.contains(it)) } // O^n2 performance, should be optimized for large lists
             }
             boxSettingsFlow.collect {
                 _boxSettings.value = it
