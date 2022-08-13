@@ -24,11 +24,6 @@ class BoxFragment : Fragment(R.layout.fragment_box) {
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("itlife0088", "onCreate: $this")
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBoxBinding.bind(view)
@@ -37,27 +32,8 @@ class BoxFragment : Fragment(R.layout.fragment_box) {
         binding.boxTextView.text = getString(R.string.this_is_box, getColorName())
 
         binding.goBackButton.setOnClickListener { onGoBackButtonPressed() }
-        Log.d("itlife0088", "onCreatedView: $this")
 
         listenShouldExitEvent()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("itlife0088", "onDestroyView: $this")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("itlife0088", "onDestroy: $this")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(
-            "itrr0088",
-            "backstack ${requireActivity().supportFragmentManager.backStackEntryCount}"
-        )
     }
 
     private fun onGoBackButtonPressed() {

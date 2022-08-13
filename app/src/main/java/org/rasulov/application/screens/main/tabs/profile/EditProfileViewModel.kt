@@ -64,8 +64,4 @@ class EditProfileViewModel(
 
     private fun showEmptyFieldErrorMessage() = _showEmptyFieldErrorEvent.publishEvent()
 
-    override fun onCleared() {
-        super.onCleared()
-        Log.d("itlife0088", "onCleared: clear")
-    }
 }

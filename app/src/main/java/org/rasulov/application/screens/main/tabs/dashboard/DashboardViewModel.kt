@@ -24,8 +24,4 @@ class DashboardViewModel(
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        Log.d("itlife0088", "onCleared: dashboasrd")
-    }
 }

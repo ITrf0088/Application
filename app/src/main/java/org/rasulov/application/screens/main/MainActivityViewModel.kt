@@ -19,7 +19,7 @@ class MainActivityViewModel(
             // listening for the current account and send the username to be displayed in the toolbar
             accountsRepository.getAccount().collect {
                 if (it == null) {
-                    _username.value = ""
+                    _username.value = it
                 } else {
                     _username.value = "@${it.username}"
                 }

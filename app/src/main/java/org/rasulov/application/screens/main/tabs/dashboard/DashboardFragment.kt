@@ -3,6 +3,7 @@ package org.rasulov.application.screens.main.tabs.dashboard
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -19,10 +20,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
     private lateinit var binding: FragmentDashboardBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("itlife0088", "onCreate: $this")
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,21 +27,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
         clearBoxViews()
 
-        Log.d("itr0088", "onCreateview: ${parentFragment?.parentFragmentManager} $this")
-        Log.d("itr0088", "onCreateview: $childFragmentManager $this")
-        Log.d("itlife0088", "onCreatedView: $this")
         viewModel.boxes.observe(viewLifecycleOwner) { renderBoxes(it) }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("itlife0088", "onDestroyView: $this")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("itlife0088", "onDestroy: $this")
-    }
 
     private fun renderBoxes(boxes: List<Box>) {
         clearBoxViews()
@@ -72,15 +57,15 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             dashboardItemView.tag = box
             dashboardItemView.setOnClickListener(boxClickListener)
             val params = ConstraintLayout.LayoutParams(width, height)
-            binding.boxesContainer.addView(dashboardItemView, params)
+             binding.boxesContainer.addView(dashboardItemView, params)
             return@map id
         }.toIntArray()
+
         binding.flowView.referencedIds = generatedIdentifiers
     }
 
     private fun clearBoxViews() {
         binding.boxesContainer.removeViews(1, binding.root.childCount - 1)
-
     }
 
     private val boxClickListener = View.OnClickListener {

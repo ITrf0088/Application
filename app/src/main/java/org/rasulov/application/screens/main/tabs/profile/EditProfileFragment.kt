@@ -18,10 +18,6 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     private val viewModel by viewModelCreator { EditProfileViewModel(Repositories.accountsRepository) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("itlife0088", "onCreate: $this")
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,18 +29,6 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         observeGoBackEvent()
         observeSaveInProgress()
         observeEmptyFieldErrorEvent()
-        Log.d("itlife0088", "onCreatedView: $this")
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("itlife0088", "onDestroyView: $this")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("itlife0088", "onDestroy: $this")
     }
 
     private fun onSaveButtonPressed() {
@@ -63,13 +47,15 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         }
     }
 
-    private fun listenInitialUsernameEvent() = viewModel.initialUsernameEvent.observeEvent(viewLifecycleOwner) { username ->
-        binding.usernameEditText.setText(username)
-    }
+    private fun listenInitialUsernameEvent() =
+        viewModel.initialUsernameEvent.observeEvent(viewLifecycleOwner) { username ->
+            binding.usernameEditText.setText(username)
+        }
 
-    private fun observeEmptyFieldErrorEvent() = viewModel.showEmptyFieldErrorEvent.observeEvent(viewLifecycleOwner) {
-        Toast.makeText(requireContext(), R.string.field_is_empty, Toast.LENGTH_SHORT).show()
-    }
+    private fun observeEmptyFieldErrorEvent() =
+        viewModel.showEmptyFieldErrorEvent.observeEvent(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), R.string.field_is_empty, Toast.LENGTH_SHORT).show()
+        }
 
     private fun onCancelButtonPressed() {
         findNavController().popBackStack()

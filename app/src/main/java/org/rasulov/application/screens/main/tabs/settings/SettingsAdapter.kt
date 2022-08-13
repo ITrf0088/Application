@@ -27,7 +27,7 @@ class SettingsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val inflater = LayoutInflater.from(parent.context)
-        val checkBox = inflater.inflate(R.layout.item_setting, parent, false) as CheckBox
+        val checkBox = inflater.inflate(R.layout.item_setting, null, false) as CheckBox
         checkBox.setOnClickListener(this)
         return Holder(checkBox)
     }

@@ -23,10 +23,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val viewModel by viewModelCreator { ProfileViewModel(Repositories.accountsRepository) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("itlife0088", "onCreate: $this")
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,20 +30,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         binding.editProfileButton.setOnClickListener { onEditProfileButtonPressed() }
         binding.logoutButton.setOnClickListener { onLogoutButtonPressed() }
-        Log.d("itlife0088", "onCreatedView: $this")
         observeAccountDetails()
         observeRestartAppFromLoginScreenEvent()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("itlife0088", "onDestroyView: $this")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("itlife0088", "onDestroy: $this")
-    }
 
     private fun observeAccountDetails() {
         val formatter = SimpleDateFormat.getDateTimeInstance()

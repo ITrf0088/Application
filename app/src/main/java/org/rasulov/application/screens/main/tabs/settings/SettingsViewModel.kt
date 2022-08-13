@@ -1,5 +1,6 @@
 package org.rasulov.application.screens.main.tabs.settings
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,9 +25,11 @@ class SettingsViewModel(
                 allBoxes.map {
                     BoxSetting(it, activeBoxes.contains(it)) } // O^n2 performance, should be optimized for large lists
             }
+
             boxSettingsFlow.collect {
                 _boxSettings.value = it
             }
+
         }
     }
 

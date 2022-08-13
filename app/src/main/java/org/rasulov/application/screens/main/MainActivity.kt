@@ -6,17 +6,15 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import org.rasulov.application.R
 import org.rasulov.application.databinding.ActivityMainBinding
 import org.rasulov.application.model.Repositories
 import org.rasulov.application.screens.main.tabs.TabsFragment
-import org.rasulov.application.utils.requireExtraOrThrow
+import org.rasulov.application.utils.requireExtra
 import org.rasulov.application.utils.viewModelCreator
 import java.util.regex.Pattern
 
@@ -123,7 +121,7 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun isSignedIn(): Boolean = requireExtraOrThrow(IS_SIGNED_IN)
+    private fun isSignedIn(): Boolean = requireExtra(IS_SIGNED_IN)
 
     private fun getMainNavigationGraphId() = R.navigation.main_nav_graph
 

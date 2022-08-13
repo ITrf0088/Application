@@ -49,6 +49,15 @@ class SignUpViewModel(
         }
     }
 
+
+    private fun showProgress() {
+        _state.value = State(signUpInProgress = true)
+    }
+
+    private fun showSuccessSignUpMessage() = _showSuccessSignUpMessageEvent.publishEvent()
+
+    private fun goBack() = _goBackEvent.publishEvent()
+
     private fun processEmptyFieldException(e: EmptyFieldException) {
         _state.value = when (e.field) {
             Field.Email -> _state.requireValue()
@@ -71,17 +80,9 @@ class SignUpViewModel(
             .copy(emailErrorMessageRes = R.string.account_already_exists)
     }
 
-    private fun showProgress() {
-        _state.value = State(signUpInProgress = true)
-    }
-
     private fun hideProgress() {
         _state.value = _state.requireValue().copy(signUpInProgress = false)
     }
-
-    private fun showSuccessSignUpMessage() = _showSuccessSignUpMessageEvent.publishEvent()
-
-    private fun goBack() = _goBackEvent.publishEvent()
 
     data class State(
         @StringRes val emailErrorMessageRes: Int = NO_ERROR_MESSAGE,

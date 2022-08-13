@@ -41,6 +41,11 @@ class SignInViewModel(
         }
     }
 
+    private fun showProgress() {
+        _state.value = State(signInInProgress = true)
+    }
+
+
     private fun processEmptyFieldException(e: EmptyFieldException) {
         _state.value = _state.requireValue().copy(
             emptyEmailError = e.field == Field.Email,
@@ -57,9 +62,6 @@ class SignInViewModel(
         showAuthErrorToast()
     }
 
-    private fun showProgress() {
-        _state.value = State(signInInProgress = true)
-    }
 
     private fun clearPasswordField() = _clearPasswordEvent.publishEvent()
 

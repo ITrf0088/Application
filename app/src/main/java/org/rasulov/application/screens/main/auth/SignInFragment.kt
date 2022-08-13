@@ -60,7 +60,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     private fun observeClearPasswordEvent() =
         viewModel.clearPasswordEvent.observeEvent(viewLifecycleOwner) {
             binding.passwordEditText.text?.clear()
-            findNavController()
+
         }
 
     private fun observeNavigateToTabsEvent() =

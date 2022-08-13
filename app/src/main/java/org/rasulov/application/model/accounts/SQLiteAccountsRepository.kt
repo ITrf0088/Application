@@ -76,7 +76,6 @@ class SQLiteAccountsRepository(
             if (accountId == AppSettings.NO_ACCOUNT_ID) throw AuthException()
 
             updateUsernameForAccountId(accountId, newUsername)
-            Log.d("itrr0088", "updateAccountUsername: ${accountId}")
             currentAccountIdFlow.get().value = AccountId(accountId)
             return@wrapSQLiteException
         }

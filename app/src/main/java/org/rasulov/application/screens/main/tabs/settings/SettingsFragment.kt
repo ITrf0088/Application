@@ -16,28 +16,14 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private val viewModel by viewModelCreator { SettingsViewModel(Repositories.boxesRepository) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("itlife0088", "onCreate: $this")
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSettingsBinding.bind(view)
 
         val adapter = setupList()
         viewModel.boxSettings.observe(viewLifecycleOwner) { adapter.renderSettings(it) }
-        Log.d("itlife0088", "onCreatedView: $this")
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("itlife0088", "onDestroyView: $this")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("itlife0088", "onDestroy: $this")
-    }
 
     private fun setupList(): SettingsAdapter {
         binding.settingsList.layoutManager = LinearLayoutManager(requireContext())
