@@ -1,4 +1,4 @@
-package org.rasulov.application.model.accounts.entities
+package org.rasulov.application.model.accounts.core.entities
 
 import org.rasulov.application.model.EmptyFieldException
 import org.rasulov.application.model.Field

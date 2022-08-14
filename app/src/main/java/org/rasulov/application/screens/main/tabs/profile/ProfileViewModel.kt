@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import org.rasulov.application.model.accounts.AccountsRepository
-import org.rasulov.application.model.accounts.entities.Account
+import org.rasulov.application.model.accounts.core.AccountsRepository
+import org.rasulov.application.model.accounts.core.entities.Account
 import org.rasulov.application.utils.MutableLiveEvent
 import org.rasulov.application.utils.publishEvent
 import org.rasulov.application.utils.share

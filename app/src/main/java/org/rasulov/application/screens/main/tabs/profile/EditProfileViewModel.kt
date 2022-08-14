@@ -1,6 +1,5 @@
 package org.rasulov.application.screens.main.tabs.profile
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +7,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.rasulov.application.model.EmptyFieldException
-import org.rasulov.application.model.accounts.AccountsRepository
+import org.rasulov.application.model.accounts.core.AccountsRepository
 import org.rasulov.application.utils.MutableLiveEvent
 import org.rasulov.application.utils.MutableUnitLiveEvent
 import org.rasulov.application.utils.publishEvent

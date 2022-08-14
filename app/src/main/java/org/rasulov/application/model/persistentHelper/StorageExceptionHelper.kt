@@ -1,4 +1,4 @@
-package org.rasulov.application.model.sqlite
+package org.rasulov.application.model.persistentHelper.sqlite_api
 
 import android.database.sqlite.SQLiteException
 import kotlinx.coroutines.CoroutineDispatcher

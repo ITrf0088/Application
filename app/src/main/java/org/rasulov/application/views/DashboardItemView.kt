@@ -11,7 +11,7 @@ import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import org.rasulov.application.R
 import org.rasulov.application.databinding.PartDashboardItemBinding
-import org.rasulov.application.model.boxes.entities.Box
+import org.rasulov.application.model.boxes.core.entities.Box
 
 
 class DashboardItemView(

@@ -7,7 +7,8 @@ import android.widget.CheckBox
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import org.rasulov.application.R
-import org.rasulov.application.model.boxes.entities.Box
+import org.rasulov.application.model.boxes.core.entities.Box
+import org.rasulov.application.model.boxes.core.entities.BoxSetting
 
 class SettingsAdapter(
     private val listener: Listener
@@ -27,7 +28,7 @@ class SettingsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val inflater = LayoutInflater.from(parent.context)
-        val checkBox = inflater.inflate(R.layout.item_setting, null, false) as CheckBox
+        val checkBox = inflater.inflate(R.layout.item_setting, parent, false) as CheckBox
         checkBox.setOnClickListener(this)
         return Holder(checkBox)
     }
@@ -37,8 +38,8 @@ class SettingsAdapter(
         val context = holder.itemView.context
         holder.checkBox.tag = setting.box
 
-        if (holder.checkBox.isChecked != setting.enabled) {
-            holder.checkBox.isChecked = setting.enabled
+        if (holder.checkBox.isChecked != setting.isActive) {
+            holder.checkBox.isChecked = setting.isActive
         }
 
         val colorName = setting.box.colorName

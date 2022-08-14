@@ -1,16 +1,14 @@
 package org.rasulov.application.screens.main.tabs.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import org.rasulov.application.R
 import org.rasulov.application.databinding.FragmentProfileBinding
 import org.rasulov.application.model.Repositories
-import org.rasulov.application.model.accounts.entities.Account
+import org.rasulov.application.model.accounts.core.entities.Account
 import org.rasulov.application.utils.findTopNavController
 import org.rasulov.application.utils.viewModelCreator
 import org.rasulov.application.utils.observeEvent

@@ -1,13 +1,13 @@
 package org.rasulov.application.screens.main.tabs.settings
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import org.rasulov.application.model.boxes.BoxesRepository
-import org.rasulov.application.model.boxes.entities.Box
+import org.rasulov.application.model.boxes.core.BoxesRepository
+import org.rasulov.application.model.boxes.core.entities.Box
+import org.rasulov.application.model.boxes.core.entities.BoxSetting
 import org.rasulov.application.utils.share
 
 class SettingsViewModel(
@@ -19,17 +19,10 @@ class SettingsViewModel(
 
     init {
         viewModelScope.launch {
-            val allBoxesFlow = boxesRepository.getBoxes(onlyActive = false)
-            val activeBoxesFlow = boxesRepository.getBoxes(onlyActive = true)
-            val boxSettingsFlow = combine(allBoxesFlow, activeBoxesFlow) { allBoxes, activeBoxes ->
-                allBoxes.map {
-                    BoxSetting(it, activeBoxes.contains(it)) } // O^n2 performance, should be optimized for large lists
-            }
-
-            boxSettingsFlow.collect {
+            val boxSettings = boxesRepository.getBoxesAndSettings(onlyActive = false)
+            boxSettings.collect {
                 _boxSettings.value = it
             }
-
         }
     }
 

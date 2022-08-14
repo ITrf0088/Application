@@ -10,8 +10,8 @@ import org.rasulov.application.model.AccountAlreadyExistsException
 import org.rasulov.application.model.EmptyFieldException
 import org.rasulov.application.model.Field
 import org.rasulov.application.model.PasswordMismatchException
-import org.rasulov.application.model.accounts.AccountsRepository
-import org.rasulov.application.model.accounts.entities.SignUpData
+import org.rasulov.application.model.accounts.core.AccountsRepository
+import org.rasulov.application.model.accounts.core.entities.SignUpData
 import org.rasulov.application.utils.MutableUnitLiveEvent
 import org.rasulov.application.utils.publishEvent
 import org.rasulov.application.utils.requireValue

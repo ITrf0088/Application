@@ -1,4 +1,4 @@
-package org.rasulov.application.model.accounts.entities
+package org.rasulov.application.model.accounts.core.entities
 
 data class Account(
     val id: Long,

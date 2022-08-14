@@ -1,16 +1,14 @@
 package org.rasulov.application.screens.main.tabs.dashboard
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.rasulov.application.R
 import org.rasulov.application.databinding.FragmentDashboardBinding
 import org.rasulov.application.model.Repositories
-import org.rasulov.application.model.boxes.entities.Box
+import org.rasulov.application.model.boxes.core.entities.Box
 import org.rasulov.application.utils.viewModelCreator
 import org.rasulov.application.views.DashboardItemView
 

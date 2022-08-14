@@ -11,7 +11,7 @@ import com.google.android.material.textfield.TextInputLayout
 import org.rasulov.application.R
 import org.rasulov.application.databinding.FragmentSignUpBinding
 import org.rasulov.application.model.Repositories
-import org.rasulov.application.model.accounts.entities.SignUpData
+import org.rasulov.application.model.accounts.core.entities.SignUpData
 import org.rasulov.application.utils.viewModelCreator
 import org.rasulov.application.utils.observeEvent
 

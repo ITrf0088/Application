@@ -1,12 +1,11 @@
 package org.rasulov.application.screens.main.tabs.dashboard
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import org.rasulov.application.model.boxes.BoxesRepository
-import org.rasulov.application.model.boxes.entities.Box
+import org.rasulov.application.model.boxes.core.BoxesRepository
+import org.rasulov.application.model.boxes.core.entities.Box
 import org.rasulov.application.utils.share
 
 class DashboardViewModel(
@@ -18,8 +17,8 @@ class DashboardViewModel(
 
     init {
         viewModelScope.launch {
-            boxesRepository.getBoxes(onlyActive = true).collect {
-                _boxes.value = it
+            boxesRepository.getBoxesAndSettings(onlyActive = true).collect { list ->
+                _boxes.value = list.map { it.box }
             }
         }
     }

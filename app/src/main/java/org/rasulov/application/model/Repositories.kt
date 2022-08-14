@@ -1,16 +1,16 @@
 package org.rasulov.application.model
 
 import android.content.Context
-import android.database.sqlite.SQLiteDatabase
+import androidx.room.Room
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import org.rasulov.application.model.accounts.AccountsRepository
-import org.rasulov.application.model.accounts.SQLiteAccountsRepository
-import org.rasulov.application.model.boxes.BoxesRepository
-import org.rasulov.application.model.boxes.SQLiteBoxesRepository
+import org.rasulov.application.model.accounts.core.AccountsRepository
+import org.rasulov.application.model.accounts.impl.room.RoomAccountsRepository
+import org.rasulov.application.model.boxes.core.BoxesRepository
+import org.rasulov.application.model.boxes.impl.room.RoomBoxesRepository
+import org.rasulov.application.model.persistentHelper.room.AppDatabase
 import org.rasulov.application.model.settings.AppSettings
 import org.rasulov.application.model.settings.SharedPreferencesAppSettings
-import org.rasulov.application.model.sqlite.AppSQLiteHelper
 
 object Repositories {
 
@@ -22,8 +22,14 @@ object Repositories {
 
     // -- stuffs
 
-    private val database: SQLiteDatabase by lazy<SQLiteDatabase> {
-        AppSQLiteHelper(applicationContext).writableDatabase
+    private val database: AppDatabase by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "database.db"
+        )
+            .createFromAsset("init.db")
+            .build()
     }
 
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
@@ -35,11 +41,11 @@ object Repositories {
     // --- repositories
 
     val accountsRepository: AccountsRepository by lazy {
-        SQLiteAccountsRepository(database, appSettings, ioDispatcher)
+        RoomAccountsRepository(database.getAccountsDao(), appSettings, ioDispatcher)
     }
 
     val boxesRepository: BoxesRepository by lazy {
-        SQLiteBoxesRepository(database, accountsRepository, ioDispatcher)
+        RoomBoxesRepository(accountsRepository, database.getBoxesDao(), ioDispatcher)
     }
 
 

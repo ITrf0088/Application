@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import org.rasulov.application.model.boxes.BoxesRepository
+import org.rasulov.application.model.boxes.core.BoxesRepository
 import org.rasulov.application.utils.MutableLiveEvent
 import org.rasulov.application.utils.publishEvent
 import org.rasulov.application.utils.share
@@ -19,8 +19,8 @@ class BoxViewModel(
 
     init {
         viewModelScope.launch {
-            boxesRepository.getBoxes(onlyActive = true)
-                .map { boxes -> boxes.firstOrNull { it.id == boxId } }
+            boxesRepository.getBoxesAndSettings(onlyActive = true)
+                .map { boxes -> boxes.firstOrNull { it.box.id == boxId } }
                 .collect { currentBox ->
                     _shouldExitEvent.publishEvent(currentBox == null)
                 }

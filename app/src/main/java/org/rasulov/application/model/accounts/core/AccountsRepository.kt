@@ -1,8 +1,8 @@
-package org.rasulov.application.model.accounts
+package org.rasulov.application.model.accounts.core
 
 import kotlinx.coroutines.flow.Flow
-import org.rasulov.application.model.accounts.entities.Account
-import org.rasulov.application.model.accounts.entities.SignUpData
+import org.rasulov.application.model.accounts.core.entities.Account
+import org.rasulov.application.model.accounts.core.entities.SignUpData
 
 
 /**

@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 import org.rasulov.application.model.AuthException
 import org.rasulov.application.model.EmptyFieldException
 import org.rasulov.application.model.Field
-import org.rasulov.application.model.accounts.AccountsRepository
+import org.rasulov.application.model.accounts.core.AccountsRepository
 import org.rasulov.application.utils.MutableUnitLiveEvent
 import org.rasulov.application.utils.publishEvent
 import org.rasulov.application.utils.requireValue
