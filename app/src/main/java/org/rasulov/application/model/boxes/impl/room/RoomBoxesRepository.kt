@@ -1,6 +1,5 @@
 package org.rasulov.application.model.boxes.impl.room
 
-import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
@@ -10,6 +9,7 @@ import org.rasulov.application.model.boxes.core.BoxesRepository
 import org.rasulov.application.model.boxes.core.entities.Box
 import org.rasulov.application.model.boxes.core.entities.BoxSetting
 import org.rasulov.application.model.boxes.impl.room.entities.AccountBoxSettingsEntity
+import org.rasulov.application.model.boxes.impl.room.entities.SettingsTuple
 import org.rasulov.application.model.persistentHelper.sqlite_api.wrapSQLiteException
 
 @Suppress("OPT_IN_IS_NOT_ENABLED")
@@ -48,8 +48,8 @@ class RoomBoxesRepository(
             .map { boxAndSettings ->
                 boxAndSettings.map { boxSettingEntry ->
                     BoxSetting(
-                        box = boxSettingEntry.key.toBox(),
-                        isActive = boxSettingEntry.value?.isActive ?: true
+                        box = boxSettingEntry.boxDBEntity.toBox(),
+                        isActive = boxSettingEntry.settingDBEntity?.setting?.isActive ?: true
                     )
                 }
             }
@@ -62,7 +62,7 @@ class RoomBoxesRepository(
             AccountBoxSettingsEntity(
                 accountId,
                 box.id,
-                isActive
+                SettingsTuple(isActive)
             )
         )
     }
