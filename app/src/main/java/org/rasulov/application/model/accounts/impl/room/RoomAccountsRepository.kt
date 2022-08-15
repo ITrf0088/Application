@@ -16,10 +16,12 @@ import org.rasulov.application.model.accounts.impl.room.entities.AccountUpdateUs
 import org.rasulov.application.model.persistentHelper.sqlite_api.wrapSQLiteException
 import org.rasulov.application.model.settings.AppSettings
 import org.rasulov.application.utils.AsyncLoader
+import org.rasulov.application.utils.security.Security
 
 class RoomAccountsRepository(
     private val accountsDao: AccountsDao,
     private val appSettings: AppSettings,
+    private val security: Security,
     private val ioDispatcher: CoroutineDispatcher
 ) : AccountsRepository {
 
@@ -84,7 +86,11 @@ class RoomAccountsRepository(
 
     private suspend fun findAccountIdByEmailAndPassword(email: String, password: String): Long {
         val accountsSignInTuple = accountsDao.findByEmail(email) ?: throw AuthException()
-        if (accountsSignInTuple.passw != password) throw AuthException()
+
+        val salt = security.stringToBytes(accountsSignInTuple.salt)
+        val hash = security.passwordToHash(password.toCharArray(), salt)
+        val hashStr = security.bytesToString(hash)
+        if (accountsSignInTuple.hashPassword != hashStr) throw AuthException()
         return accountsSignInTuple.id
 
     }
@@ -92,7 +98,7 @@ class RoomAccountsRepository(
     private suspend fun createAccount(signUpData: SignUpData) {
         try {
             accountsDao.createAccount(
-                accountDBEntity = AccountDBEntity.fromSignUpData(signUpData)
+                accountDBEntity = AccountDBEntity.fromSignUpData(signUpData, security)
             )
         } catch (e: SQLiteConstraintException) {
             val ex = AccountAlreadyExistsException()

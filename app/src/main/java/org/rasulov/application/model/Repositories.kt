@@ -11,6 +11,7 @@ import org.rasulov.application.model.boxes.impl.room.RoomBoxesRepository
 import org.rasulov.application.model.persistentHelper.room.AppDatabase
 import org.rasulov.application.model.settings.AppSettings
 import org.rasulov.application.model.settings.SharedPreferencesAppSettings
+import org.rasulov.application.utils.security.SecurityImpl
 
 object Repositories {
 
@@ -21,6 +22,8 @@ object Repositories {
     }
 
     // -- stuffs
+
+    private val security by lazy { SecurityImpl() }
 
     private val database: AppDatabase by lazy {
         Room.databaseBuilder(
@@ -41,7 +44,7 @@ object Repositories {
     // --- repositories
 
     val accountsRepository: AccountsRepository by lazy {
-        RoomAccountsRepository(database.getAccountsDao(), appSettings, ioDispatcher)
+        RoomAccountsRepository(database.getAccountsDao(), appSettings, security, ioDispatcher)
     }
 
     val boxesRepository: BoxesRepository by lazy {

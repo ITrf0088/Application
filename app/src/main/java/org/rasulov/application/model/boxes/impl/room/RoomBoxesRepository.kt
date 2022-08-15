@@ -49,7 +49,7 @@ class RoomBoxesRepository(
                 boxAndSettings.map { boxSettingEntry ->
                     BoxSetting(
                         box = boxSettingEntry.boxDBEntity.toBox(),
-                        isActive = boxSettingEntry.settingDBEntity?.setting?.isActive ?: true
+                        isActive = boxSettingEntry.settingDBEntity.setting.isActive
                     )
                 }
             }
