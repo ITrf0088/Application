@@ -2,6 +2,7 @@ package org.rasulov.application.model.boxes.impl.room.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
+import androidx.room.Junction
 import androidx.room.Relation
 import org.rasulov.application.model.accounts.impl.room.entities.AccountDBEntity
 
@@ -16,7 +17,9 @@ data class BoxAndSettingsTuple(
 )
 
 
+
 data class SettingWithEntitiesTuple(
+
     @Embedded val settingDBEntity: AccountBoxSettingsEntity,
 
     @Relation(
@@ -30,4 +33,24 @@ data class SettingWithEntitiesTuple(
         entityColumn = "id"
     )
     val boxDBEntity: BoxDBEntity
+)
+
+
+data class AccountAndEditedBoxesTuple(
+
+    @Embedded val accountDBEntity: AccountDBEntity,
+
+    @Relation(
+
+        parentColumn = "id",
+        entityColumn = "id",
+
+        associateBy = Junction(
+            value = AccountBoxSettingsEntity::class,
+            parentColumn = "account_id",
+            entityColumn = "box_id"
+        )
+    )
+    val boxes: List<BoxDBEntity>
+
 )

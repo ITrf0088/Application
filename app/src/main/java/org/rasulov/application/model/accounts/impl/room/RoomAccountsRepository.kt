@@ -98,7 +98,10 @@ class RoomAccountsRepository(
     private suspend fun createAccount(signUpData: SignUpData) {
         try {
             accountsDao.createAccount(
-                accountDBEntity = AccountDBEntity.fromSignUpData(signUpData, security)
+                accountDBEntity = AccountDBEntity.fromSignUpData(
+                    signUpData,
+                    security
+                )
             )
         } catch (e: SQLiteConstraintException) {
             val ex = AccountAlreadyExistsException()

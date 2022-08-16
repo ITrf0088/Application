@@ -1,12 +1,13 @@
 package org.rasulov.application.model.accounts.impl.room
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import org.rasulov.application.model.accounts.impl.room.entities.AccountAndEditedBoxesTuple
 import org.rasulov.application.model.accounts.impl.room.entities.AccountDBEntity
 import org.rasulov.application.model.accounts.impl.room.entities.AccountSignInTuple
 import org.rasulov.application.model.accounts.impl.room.entities.AccountUpdateUsernameTuple
-import org.rasulov.application.model.boxes.impl.room.entities.SettingWithEntitiesTuple
 
 @Dao
 interface AccountsDao {
@@ -24,8 +25,6 @@ interface AccountsDao {
     fun getById(accountId: Long): Flow<AccountDBEntity?>
 
 
-    @Transaction
-    @Query("SELECT * FROM accounts WHERE id = :accountId")
-    fun getAccountAndEditedBoxes(accountId: Long): AccountAndEditedBoxesTuple
+
 
 }

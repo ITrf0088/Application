@@ -1,6 +1,7 @@
 package org.rasulov.application.model.persistentHelper.room
 
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import androidx.core.content.contentValuesOf
 import androidx.room.RenameColumn
 import androidx.room.migration.AutoMigrationSpec
@@ -10,11 +11,11 @@ import org.rasulov.application.utils.security.SecurityImpl
 @RenameColumn(tableName = "accounts", fromColumnName = "password", toColumnName = "hashPassword")
 class AutoMigrationSpec1to2 : AutoMigrationSpec {
 
-    val security = SecurityImpl()
+    private val security = SecurityImpl()
 
     override fun onPostMigrate(db: SupportSQLiteDatabase) {
         super.onPostMigrate(db)
-
+        Log.d("it0088", "onPostMigrate: ")
         db.query("SELECT * FROM accounts").use { cursor ->
             val passwordHashIndex = cursor.getColumnIndex("hashPassword")
             val idIndex = cursor.getColumnIndex("id")

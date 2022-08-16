@@ -20,7 +20,7 @@ data class AccountDBEntity(
     val username: String,
     val hashPassword: String,
     @ColumnInfo(defaultValue = "") val salt: String,
-    @ColumnInfo(name = "created_at") val createdAt: Long = Account.UNKNOWN_CREATED_AT
+    @ColumnInfo(name = "created_at") val createdAt: Long
 ) {
 
     fun toAccount() = Account(
